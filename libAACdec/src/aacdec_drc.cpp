@@ -705,7 +705,7 @@ static int aacDecoder_drcExtractAndMap (
   }
   self->numPayloads = 0;
 
-  if (self->dvbAncDataAvailable)
+  if (self->dvbAncDataAvailable && self->numThreads < MAX_DRC_THREADS)
   { /* Append a DVB heavy compression payload thread if available. */
     int bitsParsed;
 
