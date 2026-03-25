@@ -233,6 +233,8 @@ float SpaceTree_ParamBand2Freq(int nParamBands, int nSampleRate, int nParamBand,
 
 float SpaceTree_GetUniSteCld(HANDLE_SPACE_TREE hSpaceTree, int parameterBand);
 
+int SpaceTree_GetbKorSpeech(HANDLE_SPACE_TREE hSpaceTree);
+
 #ifdef __cplusplus
 }
 #endif

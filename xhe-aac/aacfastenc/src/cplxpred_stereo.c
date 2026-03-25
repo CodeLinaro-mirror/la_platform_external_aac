@@ -238,17 +238,6 @@ static float iisaacfenc_calcComplexPredictionCoefficient(const float *mdctSpectr
   return covarianceMidSide / (energyDmxRe + FLT_MIN);
 }
 
-static int limitCoef(int coef) {
-  const int limit = DELTA_LIMIT / 2;
-  if (coef > limit) {
-    coef = limit;
-  }
-  if (coef < -limit) {
-    coef = -limit;
-  }
-  return coef;
-}
-
 static int iisaacfenc_rdOptimizeCplxPred(const int sfbCnt,
                                          const int sfbPerGroup,
                                          const int maxSfbPerGroup,
@@ -421,8 +410,6 @@ static int iisaacfenc_rdOptimizeCplxPred(const int sfbCnt,
           tmpCoeffIm = predCoeffImQ[sfb];
           predCoeffReQ[sfb] = prevBandCoeffReQ + deltaFreqRe[predBand];
           predCoeffImQ[sfb] = prevBandCoeffImQ + deltaFreqIm[predBand];
-          predCoeffReQ[sfb] = limitCoef(predCoeffReQ[sfb]);
-          predCoeffImQ[sfb] = limitCoef(predCoeffImQ[sfb]);
           predBand++;
           prevBandCoeffReQ = predCoeffReQ[sfb];
           prevBandCoeffImQ = predCoeffImQ[sfb];
@@ -451,8 +438,6 @@ static int iisaacfenc_rdOptimizeCplxPred(const int sfbCnt,
           tmpCoeffIm = predCoeffImQ[sfb];
           predCoeffReQ[sfb] = predCoeffPrevReQ[sfb] + deltaTimeRe[predBand];
           predCoeffImQ[sfb] = predCoeffPrevImQ[sfb] + deltaTimeIm[predBand];
-          predCoeffReQ[sfb] = limitCoef(predCoeffReQ[sfb]);
-          predCoeffImQ[sfb] = limitCoef(predCoeffImQ[sfb]);
           predBand++;
 
           if ((tmpCoeffRe != predCoeffReQ[sfb]) || (tmpCoeffIm != predCoeffImQ[sfb])) {
